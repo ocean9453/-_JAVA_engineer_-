@@ -19,7 +19,7 @@ public class RepositoryContainer {
     @Component
     public class Container{
         @Autowired 
-        public CoinRepo myUserRepo;
+        public CoinRepo coinRepo;
 
     }
 }

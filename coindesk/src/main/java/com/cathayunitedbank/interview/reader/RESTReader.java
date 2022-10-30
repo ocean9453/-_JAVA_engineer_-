@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.cathayunitedbank.interview.entity.CoinEntity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,17 +26,17 @@ public class RESTReader{
     @Value("${coin.refreshcurrency.api}")
     private String url;
 
-    public List<CoinEntity> getFetchData() throws Exception {
+    public List<HashMap<String, Object>> getFetchData() throws Exception {
         log.info("Fetching data from the url: {}", url);
         String json = restTemplate.getForObject(url, String.class);
 	
 		HashMap<String, Object> map = objectMapper.readValue(json, new TypeReference<HashMap<String, Object>>(){});
 
-        HashMap<String, Object> inside = objectMapper.convertValue(map.get("bpi"), new TypeReference<HashMap<String, Object>>(){});
+        // HashMap<String, Object> inside = objectMapper.convertValue(map.get("bpi"), new TypeReference<HashMap<String, Object>>(){});
 
-        return inside.entrySet()
+        return map.entrySet()
                 .stream()
-                .map(e -> objectMapper.convertValue(e.getValue(), CoinEntity.class))
+                .map(e -> objectMapper.convertValue(e.getValue(), new TypeReference<HashMap<String, Object>>(){}))
                 .toList();
     }
 }

@@ -25,7 +25,7 @@ public class CoinProcessor implements ItemProcessor<CoinEntity,CoinEntity>{
     @Override
     @Nullable
     public CoinEntity process(@NonNull CoinEntity item) throws Exception {
-        item.setCode(COIN_DESCRIBE.get(item.getCode()));
+        // item.setCode(COIN_DESCRIBE.get(item.getCode()));
         return item;
     }
     

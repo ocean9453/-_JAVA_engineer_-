@@ -17,6 +17,8 @@ import lombok.ToString;
 @Data
 public class CoinEntity extends BaseEntity {
     
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "ENAME")
+    private String ename;
+    @Column(name = "CNAME")
+    private String cname;
 }
