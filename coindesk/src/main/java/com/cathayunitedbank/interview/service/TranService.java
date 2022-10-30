@@ -54,4 +54,7 @@ public class TranService {
         
         return data;
     }
+
+    public void saveAll(Object object) {
+    }
 }

@@ -22,7 +22,14 @@ public class ExampleController {
     
     @PostMapping("/fetchAll")
     @ResponseBody
-    public  List<HashMap<String, Object>> fetchALl(HttpServletRequest request) throws Exception {
+    public List<HashMap<String, Object>> fetchALl() throws Exception {
         return dao.findAll();
+    }
+    
+    @PostMapping("/initialize")
+    @ResponseBody
+    public void initialize() throws Exception {
+        // 建立 幣別對應enum 遍歷 建立coinEntity 在saveAll
+        dao.saveAll(null);
     }
 }

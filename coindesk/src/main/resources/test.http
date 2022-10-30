@@ -1,4 +1,4 @@
-POST http://127.0.0.1:8081/load/fetch
+POST http://127.0.0.1:8081/load/fetchALL
 ###
 POST http://127.0.0.1:8081/load/test
 ###

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableJpaRepositories(considerNestedRepositories = true)
-@EnableScheduling
+// @EnableScheduling
 public class CoindeskApplication {
 
 	public static void main(String[] args) {

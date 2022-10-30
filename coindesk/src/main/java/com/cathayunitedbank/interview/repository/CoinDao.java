@@ -29,6 +29,10 @@ public class CoinDao {
         repo.getCoinRepo().save(pojo);
     }
 
+    public void saveAll(List<CoinEntity> pojo){
+        repo.getCoinRepo().saveAll(pojo);
+    }
+
     public List<CoinEntity> findAll(){
         return repo.getCoinRepo().findAll();
     }
