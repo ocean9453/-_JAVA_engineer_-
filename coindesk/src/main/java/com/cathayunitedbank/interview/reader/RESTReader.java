@@ -1,42 +1,51 @@
-// package com.cathayunitedbank.interview.reader;
+package com.cathayunitedbank.interview.reader;
 
-// import java.util.HashMap;
-// import java.util.List;
+import java.util.Arrays;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.stereotype.Component;
-// import org.springframework.web.client.RestTemplate;
+import javax.annotation.PostConstruct;
 
-// import com.fasterxml.jackson.core.type.TypeReference;
-// import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.batch.item.support.ListItemReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-// import lombok.extern.slf4j.Slf4j;
+import com.cathayunitedbank.interview.entity.CoinEntity;
+import com.cathayunitedbank.interview.entity.CoinEntity.Bpi;
+import com.cathayunitedbank.interview.entity.CoinEntity.UpdateTime;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-// @Slf4j
-// @Component
-// public class RESTReader{
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@Scope("prototype")
+public class RESTReader{
     
-//     @Autowired
-//     private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-//     @Autowired
-//     private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-//     @Value("${coin.refreshcurrency.api}")
-//     private String url;
+    @Value("${coin.refreshcurrency.api}")
+    private String url;
 
-//     public List<HashMap<String, Object>> getFetchData() throws Exception {
-//         log.info("Fetching data from the url: {}", url);
-//         String json = restTemplate.getForObject(url, String.class);
-	
-// 		HashMap<String, Object> map = objectMapper.readValue(json, new TypeReference<HashMap<String, Object>>(){});
+    private CoinEntity coinEntity;
 
-//         // HashMap<String, Object> inside = objectMapper.convertValue(map.get("bpi"), new TypeReference<HashMap<String, Object>>(){});
+    public ListItemReader<Bpi> FetchBpi(){
+        return new ListItemReader<>(this.coinEntity.getBpi());
+    }
 
-//         return map.entrySet()
-//                 .stream()
-//                 .map(e -> objectMapper.convertValue(e.getValue(), new TypeReference<HashMap<String, Object>>(){}))
-//                 .toList();
-//     }
-// }
+    public ListItemReader<UpdateTime> FetchTime(){
+        return  new ListItemReader<>(Arrays.asList(this.coinEntity.getUpdateTime()));
+    }
+    @PostConstruct
+    public void init() throws Exception {
+        log.info("Fetching data from the url: {}", url);
+        String json = restTemplate.getForObject(url, String.class);
+		this.coinEntity = objectMapper.readValue(json, new TypeReference<CoinEntity>(){});
+    }
+}
