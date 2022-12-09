@@ -1,7 +1,7 @@
 {
     "time": {
-        "updated": "Oct 29, 2022 09:07:00 UTC",
         "updatedISO": "2022-10-29T09:07:00+00:00",
+        "updated": "Oct 29, 2022 09:07:00 UTC",
         "updateduk": "Oct 29, 2022 at 10:07 BST"
     },
     "disclaimer": "This data was produced from the CoinDesk Bitcoin Price Index (USD). Non-USD currency data converted using hourly conversion rate from openexchangerates.org",
