@@ -1,13 +1,13 @@
--- drop table if exists BPI;
--- CREATE TABLE BPI (
---     id   INTEGER   NOT NULL AUTO_INCREMENT,
---     code VARCHAR(50) NOT NULL,
---     symbol VARCHAR(50) NOT NULL,
---     rate VARCHAR(50) NOT NULL,
---     description VARCHAR(50) NOT NULL,
---     rate_float VARCHAR(50) NOT NULL,
---     PRIMARY KEY (id)
--- );
+drop table if exists BPI;
+CREATE TABLE BPI (
+    id   INTEGER   NOT NULL AUTO_INCREMENT,
+    code VARCHAR(50) NOT NULL,
+    symbol VARCHAR(50) NOT NULL,
+    rate VARCHAR(50) NOT NULL,
+    description VARCHAR(50) NOT NULL,
+    rate_float VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
 
 -- drop table if exists UPDATETIME;
 -- CREATE TABLE UPDATETIME (

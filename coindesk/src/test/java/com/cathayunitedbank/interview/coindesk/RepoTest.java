@@ -14,27 +14,25 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.jdbc.SqlConfig.TransactionMode;
 import org.springframework.test.context.jdbc.SqlGroup;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cathayunitedbank.interview.entity.CoinEntity.Bpi;
 import com.cathayunitedbank.interview.repository.BaseRepo;
 
 // @RunWith(SpringRunner.class)
 @RunWith(MockitoJUnitRunner.class)
-@SqlGroup({
-    @Sql(scripts = "/schema.sql",
-      config = @SqlConfig(transactionMode = TransactionMode.ISOLATED)
-    ),
-    @Sql("/data.sql")
-})
-@ExtendWith(SpringExtension.class) // jUnit4
-// @ExtendWith(MockitoExtension.class) // jUnit5
-@SpringBootTest
+// @ExtendWith(SpringExtension.class) // jUnit4
+@ExtendWith(MockitoExtension.class) // jUnit5
+// @SpringBootTest
+@DataJpaTest
 public class RepoTest {
 
     @Spy
@@ -66,13 +64,22 @@ public class RepoTest {
         assertEquals(list, b3);
         verify(container, times(1)).saveAll(anyList());
     }
-
+    @Commit
+    @Transactional
+    // @SqlGroup({
+    //     @Sql(scripts = "classpath:schema.sql",
+    //       config = @SqlConfig(transactionMode = TransactionMode.ISOLATED)
+    //     ),
+    // })
+    @Sql("data.sql")
     @Test
     public void jpaUnit() {
         List<Bpi> list = container.findAll();
         // must import this 
         // import static org.assertj.core.api.Assertions.assertThat
         // assertThat(list).isEmpty();
-        assertEquals(0, list.size());
+        list.forEach((e) -> System.out.println(e.toString()));
+
+        assertEquals(3, list.size());
     }
 }

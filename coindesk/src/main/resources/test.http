@@ -1,5 +1,9 @@
 POST http://127.0.0.1:8081/load/fetchALL
 ###
-POST http://127.0.0.1:8081/load/test
+POST http://127.0.0.1:8081/load/export
 ###
 GET https://api.coindesk.com/v1/bpi/currentprice.json
+###
+POST http://127.0.0.1:8081/load/select/USD
+###
+POST http://127.0.0.1:8081/load/delete/EUR
