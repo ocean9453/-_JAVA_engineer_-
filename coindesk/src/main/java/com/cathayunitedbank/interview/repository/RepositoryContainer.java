@@ -14,11 +14,8 @@ import lombok.Getter;
 public class RepositoryContainer {
     // @Repository
     // public interface ExampleRepo extends BaseRepo<ExampleEntity, Long>{};
-    @Repository
     public interface UpdateTimeRepo extends BaseRepo<UpdateTime, Long>{};
-    @Repository
     public interface BpiRepo extends BaseRepo<Bpi, Long>{};
-    @Repository
     public interface ConvertEntityRepo extends BaseRepo<ConvertEntity, Long>{};
 
     @Getter
